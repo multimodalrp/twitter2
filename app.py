@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import streamlit.components.v1 as components
 
 # Membaca file CSV
-df = pd.read_csv("multimodal_tweets_data_images.csv")
+df = pd.read_csv("multimodal_tweets_data_user1.csv")
 
 tweet_index = st.number_input("Masukkan indeks tweet yang ingin ditampilkan", min_value=1, max_value=len(df), value=1, step=1)
 tweet_index -= 1
