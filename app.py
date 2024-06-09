@@ -92,18 +92,4 @@ page_number = st.number_input("Pilih halaman", min_value=1, max_value=(len(df) /
 
 start_idx = (page_number - 1) * page_size
 end_idx = start_idx + page_size
-page_data = df.iloc[start_idx:end_idx]
-
-# Menampilkan tabel dengan gambar
-for idx, row in page_data.iterrows():
-    st.write(f"No: {row['No']}")
-    st.write(f"Tweet Text: {row['tweet_text']}")
-    st.write(f"Tweet URL: {row['tweet_url']}")
-    image_path = f"/images/selected_images/{row['images']}.jpg"
-    if st.button(f"Lihat Gambar {row['images']}", key=f"btn_{row['No']}"):
-        image = load_image_from_dropbox(image_path)
-        st.image(image, caption=row['images'], use_column_width=True)
-    st.write(f"Anotasi 1: {row['anotasi']}")
-    st.write(f"Anotasi 2: {row['anotasi2']}")
-    st.write(f"Anotasi 3: {row['anotasi3']}")
-    st.write("---")
+st.dataframe(df.iloc[start_idx:end_idx])
