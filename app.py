@@ -50,22 +50,20 @@ df_user1['anotasi2'] = df_user2['anotasi']
 df_user1['anotasi3'] = df_user3['anotasi']
 
 # Ambil kolom yang diperlukan
-df = df_user1[['No', 'tweet_text', 'tweet_url', 'images', 'anotasi', 'anotasi2', 'anotasi3']]
-
-# Streamlit interface
-st.title("Twitter Data Visualization")
+df = df_user1[['No', 'tweet_url', 'target']]
+df2 = df_user1[['No', 'tweet_url', 'anotasi1', 'anotasi2', 'anotasi3']]
 
 tweet_index = st.number_input("Masukkan indeks tweet yang ingin ditampilkan", min_value=1, max_value=len(df), value=1, step=1)
 tweet_index -= 1
 if st.button("Tampilkan Tweet"):
     tweet_url = df.iloc[tweet_index]['tweet_url']
-    target_value = df.iloc[tweet_index]['anotasi']
+    target_value = df.iloc[tweet_index]['target']
     st.code(tweet_url)
     tweet_html = f"<p style='background-color:black;color:white;text-align:center;'>Target: {target_value}</p><blockquote class='twitter-tweet' data-media-max-width='350' align='center' data-conversation='none' data-theme='dark'><a href='{tweet_url}'></a></blockquote><script async src='https://platform.twitter.com/widgets.js' charset='utf-8'></script>"
     components.html(tweet_html, height=600, scrolling=True)
 
 # Membuat chart dari jumlah target
-target_counts = df['anotasi'].value_counts()
+target_counts = df['target'].value_counts()
 
 fig_bar, ax_bar = plt.subplots()
 bars = ax_bar.bar(target_counts.index, target_counts.values)
@@ -88,8 +86,8 @@ st.pyplot(fig_pie)
 
 # Paginasi
 page_size = 25
-page_number = st.number_input("Pilih halaman", min_value=1, max_value=(len(df) // page_size) + 1, value=1)
+page_number = st.number_input("Pilih halaman", min_value=1, max_value=(len(df2) // page_size) + 1, value=1)
 
 start_idx = (page_number - 1) * page_size
 end_idx = start_idx + page_size
-st.dataframe(df.iloc[start_idx:end_idx], hide_index=True)
+st.dataframe(df2.iloc[start_idx:end_idx], hide_index=True)
