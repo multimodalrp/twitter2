@@ -46,6 +46,7 @@ df_user2 = load_data_from_dropbox("/multimodal_tweets_data_user2.csv")
 df_user3 = load_data_from_dropbox("/multimodal_tweets_data_user3.csv")
 
 # Gabungkan data dari beberapa file
+df_user1['anotasi1'] = df_user1['anotasi']
 df_user1['anotasi2'] = df_user2['anotasi']
 df_user1['anotasi3'] = df_user3['anotasi']
 
