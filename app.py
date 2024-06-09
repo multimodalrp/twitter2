@@ -54,6 +54,14 @@ df_user1['anotasi3'] = df_user3['anotasi']
 df = df_user1[['No', 'tweet_url', 'target']]
 df2 = df_user1[['No', 'tweet_url', 'anotasi1', 'anotasi2', 'anotasi3']]
 
+# Paginasi
+page_size = 25
+page_number = st.number_input("Pilih halaman", min_value=1, max_value=(len(df2) // page_size) + 1, value=1)
+
+start_idx = (page_number - 1) * page_size
+end_idx = start_idx + page_size
+st.dataframe(df2.iloc[start_idx:end_idx], hide_index=True)
+
 tweet_index = st.number_input("Masukkan indeks tweet yang ingin ditampilkan", min_value=1, max_value=len(df), value=1, step=1)
 tweet_index -= 1
 if st.button("Tampilkan Tweet"):
@@ -84,11 +92,3 @@ st.pyplot(fig_bar)
 fig_pie, ax_pie = plt.subplots()
 ax_pie.pie(target_counts, labels=target_counts.index, autopct='%1.1f%%')
 st.pyplot(fig_pie)
-
-# Paginasi
-page_size = 25
-page_number = st.number_input("Pilih halaman", min_value=1, max_value=(len(df2) // page_size) + 1, value=1)
-
-start_idx = (page_number - 1) * page_size
-end_idx = start_idx + page_size
-st.dataframe(df2.iloc[start_idx:end_idx], hide_index=True)
