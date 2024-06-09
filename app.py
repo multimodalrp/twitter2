@@ -41,9 +41,9 @@ def load_data_from_dropbox(file_path):
     return data
 
 # Load data dari Dropbox
-df_user1 = load_data_from_dropbox("/path/to/multimodal_tweets_data_user1.csv")
-df_user2 = load_data_from_dropbox("/path/to/multimodal_tweets_data_user2.csv")
-df_user3 = load_data_from_dropbox("/path/to/multimodal_tweets_data_user3.csv")
+df_user1 = load_data_from_dropbox("/multimodal_tweets_data_user1.csv")
+df_user2 = load_data_from_dropbox("/multimodal_tweets_data_user2.csv")
+df_user3 = load_data_from_dropbox("/multimodal_tweets_data_user3.csv")
 
 # Gabungkan data dari beberapa file
 df_user1['anotasi2'] = df_user2['anotasi']
