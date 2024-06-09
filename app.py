@@ -86,13 +86,17 @@ fig_pie, ax_pie = plt.subplots()
 ax_pie.pie(target_counts, labels=target_counts.index, autopct='%1.1f%%')
 st.pyplot(fig_pie)
 
-# Menambahkan tabel dengan paginasi
-st.subheader("Tabel Data Tweet")
-
 # Paginasi
 page_size = 25
 page_number = st.number_input("Pilih halaman", min_value=1, max_value=(len(df) // page_size) + 1, value=1)
 
 start_idx = (page_number - 1) * page_size
 end_idx = start_idx + page_size
-st.dataframe(df.iloc[start_idx:end_idx])
+
+# Tampilkan tabel dengan gambar yang bisa diklik
+for i in range(start_idx, end_idx):
+    row = df.iloc[i]
+    st.write(f"**No:** {row['No']} **Tweet Text:** {row['tweet_text']} **Tweet URL:** {row['tweet_url']} **Anotasi 1:** {row['anotasi']} **Anotasi 2:** {row['anotasi2']} **Anotasi 3:** {row['anotasi3']}")
+    st.image(row['image_url'], use_column_width=True)
+    st.markdown(f"[Klik untuk lihat gambar penuh]({row['image_url']})", unsafe_allow_html=True)
+    st.write("---")
