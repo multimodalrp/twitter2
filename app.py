@@ -92,4 +92,4 @@ page_number = st.number_input("Pilih halaman", min_value=1, max_value=(len(df) /
 
 start_idx = (page_number - 1) * page_size
 end_idx = start_idx + page_size
-st.dataframe(df.iloc[start_idx:end_idx])
+st.dataframe(df.iloc[start_idx:end_idx]).reset_index(drop=True))
